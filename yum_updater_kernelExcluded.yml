@@ -6,15 +6,12 @@
   become_method: sudo
 
   tasks: 
-    - name: Pre-req packages for playbook
-      yum:
-        name:
-          - postfix
-          - yum-utils
-        - state: present
     - name: all packages upgrade
       yum:
         name: '*'
         state: latest
-        download_only: true
         exclude: kernel*
+        update_cache: yes
+        skip_broken: yes
+        auto_remove: yes
+        download_only: true
