@@ -1,6 +1,6 @@
 ---
 - name: nppstack
-  hosts: 172.18.35.50
+  hosts: webservers
   tasks:
     - name: Add the Epel repo
       yum:
@@ -15,7 +15,7 @@
     - name: ENABLE REPOS
       shell: yum-config-manager --enable remi-php73
 
-    - name: Install N.P.P STACK
+    - name: Installing N.P.P STACK
       yum:
         name:
           - nginx
@@ -31,9 +31,33 @@
           - php-curl
         state: present
 
+    - name: Init Firewalld
+      shell: firewall-cmd --add-service=http --permanent;firewall-cmd --add-service=https --permanent;
+
+    - name: Initialize POSTGRESQL
+      shell:  postgresql-setup initdb
+
+    - name: Restart Firewalld
+      service:
+        name: firewalld
+        state: restarted
+
+    - name: Enabling services
+      service:
+        name:
+          - nginx
+          - postgresql
+          - php
+          - firewalld
+        state: enabled
+
     - name: Start NGINX
       service:
-        name: nginx
+        name:
+          - nginx
+          - postgresql
+          - php
+          - firewalld
         state: started
 
     - name: All Packages Upgrade
