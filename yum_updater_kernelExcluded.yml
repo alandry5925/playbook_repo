@@ -13,5 +13,4 @@
         exclude: kernel*
         update_cache: yes
         skip_broken: yes
-        autoremove: yes
         download_only: true
