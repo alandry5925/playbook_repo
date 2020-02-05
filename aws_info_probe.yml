@@ -19,7 +19,6 @@
       lambda_info:
         query: all
         max_items:30
-      register: output
     - name: List keys
       aws_s3:
         bucket: mybucket
