@@ -8,7 +8,6 @@
   tasks:
     - aws_s3_bucket_info:
       register: result
-#gather information on region
     - aws_region_info:
         filters:
           region-name: us-west-1
@@ -19,5 +18,3 @@
       lambda_info:
         query: all
         max_items:30
-    - ec2_group_info:
-    - ec2_instance_info:
