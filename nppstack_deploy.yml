@@ -1,6 +1,6 @@
 ---
 - name: nppstack
-  hosts: webservers
+  hosts: ec2
   tasks:
     - name: Add the Epel repo
       yum:
