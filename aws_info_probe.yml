@@ -19,9 +19,5 @@
       lambda_info:
         query: all
         max_items:30
-    - name: List keys
-      aws_s3:
-        bucket: mybucket
-        mode: list
     - ec2_group_info:
     - ec2_instance_info:
